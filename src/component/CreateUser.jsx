@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import { Formik } from 'formik'
 import * as Yup from "yup"
+import { toast } from 'react-toastify'
+import { addUser } from '../redux/userAction'
+import { useDispatch } from 'react-redux'
+import {v4 as uuidv4} from 'uuid'
 const CreateUser = () => {
     const [state, setState] = useState({
         firstName: '',
@@ -30,6 +34,16 @@ const CreateUser = () => {
         formik.handleChange(event);
         setState({ ...state, [event.target.name]: event.target.value })
     }
+    const dispatch = useDispatch()
+    const onSubmit = async (values, { resetForm }) => {
+        try {
+            const newUser = { ...values, id: uuidv4() }
+            dispatch(addUser(newUser))
+        } catch (error) {
+            toast.warning("User creation failed !")
+        }
+    }
+
     return (
         <div className='container'>
             <h3>Please enter user details</h3>
@@ -39,6 +53,7 @@ const CreateUser = () => {
                     <Formik
                         initialValues={initialValues}
                         validationSchema={validationSchema}
+                        onSubmit={onSubmit}
                     >
                         {(formik) => (
                             <form className='d-flex flex-column mb-3 text-center' onSubmit={formik.handleSubmit}>
