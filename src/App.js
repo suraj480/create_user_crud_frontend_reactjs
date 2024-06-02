@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import CreateUser from './component/CreateUser';
-import ViewUser from './component/ViewUser';
+import ViewAllUser from './component/ViewAllUser';
 import NavBar from './component/NavBar';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
 
         <Routes>
           <Route path='/createUser' Component={CreateUser} />
-          <Route path='/viewAllUser' Component={ViewUser} />
+          <Route path='/viewAllUser' Component={ViewAllUser} />
 
         </Routes>
       </div>
