@@ -6,8 +6,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 const ViewAllUser = () => {
-  const users = useSelector((state) => state.users); 
- // const [users, setUsers] = useState([]);
+  //const users = useSelector((state) => state.users); 
+ const [users, setUsers] = useState([]);
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -16,8 +16,8 @@ const ViewAllUser = () => {
   }, []);
   const fetchUsers = async () => {
     try {
-     //   const response = await axios.get("http://localhost:8081/api/users");
-      //setUsers(response.data);
+        const response = await axios.get("http://localhost:8081/api/users");
+      setUsers(response.data);
 //      setUsers(user)
       toast.success("User fecthed Successfully!", { autoClose: 2000 });
     } catch (error) {
@@ -39,7 +39,7 @@ const ViewAllUser = () => {
   });
   const handleDelete = async (userId) => {
     try {
-      //  await axios.delete(`http://localhost:8081/api/users/${userId}`);
+      const response= await axios.delete(`http://localhost:8081/api/users/${userId}`);
       fetchUsers();
       dispatch(deleteUser(userId));
       toast.error("User delete successfully !", { autoClose: 2000 });

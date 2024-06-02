@@ -25,7 +25,7 @@ const EditUserModal = ({ show, handleClose, user, fetchUser }) => {
   };
   const onSubmit = async (values) => {
     try {
-    //  await axios.put(`http://localhost:8081/api/users/${user.id}`, values);
+    const response= await axios.put(`http://localhost:8081/api/users/${user.id}`, values);
     dispatch(editUser({...user,...values}))
       fetchUser();
       // Refresh the list of users

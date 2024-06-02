@@ -85,7 +85,7 @@ const CreateUser = () => {
 
                                 </div>
 
-                                <div class="mb-3">
+                                <div className="mb-3">
                                     <label htmlFor='lastName' className='visually-hidden'></label>
                                     <input type='text' className='form-control' name='lastName' placeholder='Last name'
                                         onChange={(e) => handleChange(e, formik)}
@@ -99,7 +99,7 @@ const CreateUser = () => {
 
 
 
-                                <div class="mb-3">
+                                <div className="mb-3">
                                     <label htmlFor='email' className='visually-hidden'></label>
                                     <input type='text' className='form-control' name='email' placeholder='Email'
                                         onChange={(e) => handleChange(e, formik)}
@@ -111,7 +111,7 @@ const CreateUser = () => {
                                     ) : null}
                                 </div>
 
-                                <div class="mb-3">
+                                <div className="mb-3">
                                     <label htmlFor='address' className='visually-hidden'></label>
                                     <input type='text' className='form-control' name='address' placeholder='Address'
                                         onChange={(e) => handleChange(e, formik)}
