@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { Formik } from 'formik'
 import * as Yup from "yup"
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 import { addUser } from '../redux/userAction'
 import { useDispatch } from 'react-redux'
-import {v4 as uuidv4} from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
+import axios from 'axios'
+
+import "react-toastify/dist/ReactToastify.css";
 const CreateUser = () => {
     const [state, setState] = useState({
         firstName: '',
@@ -38,7 +41,17 @@ const CreateUser = () => {
     const onSubmit = async (values, { resetForm }) => {
         try {
             const newUser = { ...values, id: uuidv4() }
-            dispatch(addUser(newUser))
+            const response = await axios.post("http://localhost:8081/api/users", values)
+            console.log(response)
+            if (response.status === 200) {
+                toast.success("user created scuccessfully !", { autoClose: 2000 })
+                resetForm()
+                setState(initialValues)
+                dispatch(addUser(newUser))
+            } else {
+                toast.warning("User creation failed !")
+            }
+
         } catch (error) {
             toast.warning("User creation failed !")
         }
@@ -46,7 +59,8 @@ const CreateUser = () => {
 
     return (
         <div className='container'>
-            <h3>Please enter user details</h3>
+            <ToastContainer />
+            <h3>Please enter user details  </h3>
             <div className='row justify-content-center'>
 
                 <div className="col-md-2 mt-3">
@@ -126,11 +140,11 @@ const CreateUser = () => {
                                         Create user
                                     </button>
                                     <button className='btn btn-secondary'
-                                    onClick={()=>{
-                                        formik.resetForm();
-                                        setState(initialValues)
-                                    }}
-                                    
+                                        onClick={() => {
+                                            formik.resetForm();
+                                            setState(initialValues)
+                                        }}
+
                                     >
 
                                         Clear form
