@@ -125,7 +125,13 @@ const CreateUser = () => {
                                     <button type='submit' className='btn btn-primary me-2'>
                                         Create user
                                     </button>
-                                    <button className='btn btn-secondary'>
+                                    <button className='btn btn-secondary'
+                                    onClick={()=>{
+                                        formik.resetForm();
+                                        setState(initialValues)
+                                    }}
+                                    
+                                    >
 
                                         Clear form
                                     </button>
